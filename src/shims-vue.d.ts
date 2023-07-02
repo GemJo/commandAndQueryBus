@@ -1,11 +1,18 @@
+import { QueryHook, CommandHook } from "@/Bus/Infrastructure/BusHook";
+
 declare module 'vue/types/vue' {
-  interface Vue {}
+  interface Vue {
+    $commandBus: CommandHook,
+    $queryBus: QueryHook,
+  }
 }
 
-/*declare module '*.vue' {
-  import Vue from 'vue';
-  export default Vue;
-}*/
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $commandBus: CommandHook,
+    $queryBus: QueryHook,
+  }
+}
 
 declare module "*.vue" {
   import { defineComponent } from "vue";
